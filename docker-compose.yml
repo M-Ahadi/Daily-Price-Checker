@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  daily_price_checker:
+    build:
+      context: .
+    restart: always
+    container_name: daily_price_checker
+    environment:
+      - TZ=Asia/Tehran
+      - TIME_TO_CHECK=09:00
+      - TOKEN={TELEGRAM BOT TOKEN}
+      - MY_ID={Your Telegram ID}
+    volumes:
+      - ./urls.txt:/code:urls.txt
