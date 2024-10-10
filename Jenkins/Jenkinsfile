@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('without docker') {
+            steps {
+                echo 'Hello World'
+                sh '''
+                touch no-agent.txt
+                '''
+            }
+        }
+        stage('with docker') {
+            agent {
+                docker {
+                    image 'python:3.12'
+                    reuseNode true
+
+                }
+            }
+            steps {
+                echo 'Hello World'
+                sh '''
+                touch with-agent.txt
+                '''
+            }
+        }
+    }
+}
